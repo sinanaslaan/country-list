@@ -1,0 +1,12 @@
+.header {
+  background-color: #2b3743;
+  box-shadow: 10px 10px 10px #1d2932;
+}
+.header__wrapper {
+  display: flex;
+}
+.header__title {
+  margin: 25px;
+  color: #fff;
+  font-size: 15px;
+}/*# sourceMappingURL=homepage.css.map */

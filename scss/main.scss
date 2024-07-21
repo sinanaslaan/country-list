@@ -1,0 +1,35 @@
+@import "normalize";
+@import "homepage";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans";
+}
+
+body {
+    background: #202d36 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+main {
+    min-height: calc(100vh - 193px);
+    position: relative;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 80%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
