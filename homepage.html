@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/scss/main.css">
+    <link rel="stylesheet" href="/scss/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
-      </style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap");
+    </style>
   </head>
   <body>
     <header class="header">
@@ -16,9 +17,42 @@
           <div class="header__title">
             <h1>Where in the world?</h1>
           </div>
-          
         </div>
       </div>
     </header>
+    <main>
+      <div class="filter">
+        <div class="container">
+          <div class="filter__wrapper">
+
+
+            <div class="filter__search">
+
+              <form action="search-results">
+
+                <button class="filter__button">
+                  <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                </button>
+
+                <input id="filter__input" type="search" placeholder="Search for a country..." /> 
+              </form>
+
+
+            </div>
+
+            <div class="filter__select">
+              <select id="region" placeholder="Type to filter">
+                <option value="0">Filter by Region</option>
+                <option value="1">Africa</option>
+                <option value="2">America</option>
+                <option value="3">Asia</option>
+                <option value="4">Europe</option>
+                <option value="5">Oceania</option>
+              </select>
+            </div>
+        </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

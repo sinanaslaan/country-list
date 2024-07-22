@@ -1,15 +1,18 @@
 @import "normalize";
 @import "homepage";
+@import "header";
+@import "colors";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Open Sans";
+    color: #dae4ed;
 }
 
 body {
-    background: #202d36 0% 0% no-repeat padding-box;
+    background: $primary-bg 0% 0% no-repeat padding-box;
     opacity: 1;
 }
 
