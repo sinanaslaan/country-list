@@ -59,3 +59,45 @@
     }
 }
 
+.country {
+    margin-top: 80px;
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        width: calc(25% - 70px);
+        margin-bottom: 70px;
+        
+        img {
+            width: 100%;
+            
+            object-fit: cover;
+            box-shadow: 10px 10px 20px $box-sh;
+            border-radius: 5px 5px 0px 0px;
+
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        background: $secondary-bg;
+        box-shadow: 10px 10px 20px $box-sh;
+        border-radius: 0 0 5px 5px;
+        padding: 30px;
+        gap: 8px;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+}
+

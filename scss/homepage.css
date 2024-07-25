@@ -44,4 +44,40 @@
 .filter__select option {
   border: none;
   border-radius: 5px;
+}
+
+.country {
+  margin-top: 80px;
+}
+.country__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.country__item {
+  display: flex;
+  flex-direction: column;
+  width: calc(25% - 70px);
+  margin-bottom: 70px;
+}
+.country__item img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 10px 10px 20px #1d2932;
+  border-radius: 5px 5px 0px 0px;
+}
+.country__info {
+  display: flex;
+  flex-direction: column;
+  background: #2b3743;
+  box-shadow: 10px 10px 20px #1d2932;
+  border-radius: 0 0 5px 5px;
+  padding: 30px;
+  gap: 8px;
+}
+.country__info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }/*# sourceMappingURL=homepage.css.map */
