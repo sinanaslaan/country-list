@@ -9,6 +9,8 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
       </style>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      
   </head>
   <body>
     <header class="header">
@@ -48,39 +50,12 @@
 
       <div class="country">
         <div class="container">
-          <div class="country__wrapper">
-
-
-            <div class="country__item">
-
-              
-                <img src="./img/tr.jpg" alt="Türkiye">
-              
-              <div class="country__info">
-                <div class="country__info-item">
-                  <h2>Türkiye</h2>
-                </div>
-                <div class="country__info-item">
-                  <h3>Population:</h3>
-                    <span>81.000.000</span>
-                </div>
-                <div class="country__info-item">
-                  <h3>Region:</h3>
-                    <span>Europe</span>
-                </div>
-                <div class="country__info-item">
-                  <h3>Capital:</h3>
-                    <span>Ankara</span>
-                </div>
-                
-                
-              </div>
-            </div>
+          <div class="country__wrapper" id="country-item">
             
-
           </div>
         </div>
       </div>
     </main>
+    <script src="./js/app.js" />
   </body>
 </html>
