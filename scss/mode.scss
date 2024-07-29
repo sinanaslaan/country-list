@@ -1,0 +1,49 @@
+@import "colors";
+
+    .light-mode * {
+        color: $text-white; 
+    }
+
+    body.light-mode {
+        background: $main-white-bg 0% 0% no-repeat padding-box;
+        color: $text-white;
+        
+    }
+    
+    .header.light-mode {
+        background-color: $white-sec-bg;
+        box-shadow: 0px 5px 10px $white-box-sh;
+    }
+
+    .filter.light-mode {
+        &__button {
+            i.light-mode {
+                background-color: $place-wh;
+            }
+        }
+        form.light-mode {
+            background-color: $white-sec-bg;
+            box-shadow: 0px 5px 10px $white-box-sh;         
+        }
+        input.light-mode {
+            background-color: $white-sec-bg;            
+        }
+        select.light-mode {
+            background-color: $white-sec-bg;
+            box-shadow: 0px 5px 10px $white-box-sh;        
+        }
+        button.light-mode {
+            background-color: $white-sec-bg;     
+        }
+    }
+
+    .country {
+        img.light-mode {
+            box-shadow: 0px 5px 10px $white-box-sh;     
+        }
+        &__info.light-mode {
+            background-color: $white-sec-bg;
+            box-shadow: 0px 5px 10px $white-box-sh; 
+        }
+    }
+

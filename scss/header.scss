@@ -3,12 +3,53 @@
     box-shadow: 10px 10px 10px #1d2932;
     &__wrapper {
         display: flex;
-
+        justify-content: space-between;
+        align-items: center;
     }
 
     &__title {
         margin: 25px;
         font-size: 15px;
     }
+
+    &__mode {
+        display: flex;
+        align-items: center;
+
+
+        label {
+            height: 25px;
+            width: 60px;
+            background: #202430;
+            border-radius: 80px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            margin: 0 8px;
+        }
+        
+        #mode-toggle:checked ~ label {
+            background: whitesmoke;
+        }
+        
+        label:before {
+            content: "";
+            margin: 0 4px;
+            height: 19px;
+            width: 19px;
+            background: whitesmoke;
+            border-radius: 80px;
+            transition: 0.5s;
+        }
+        
+        #mode-toggle:checked ~ label:before {
+            transform: translateX(180%);
+            background: #202430;
+        }
+    }
+
+   
 }
 

@@ -8,10 +8,23 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     &__search {
         width: 40%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) and (max-width: 992px) {
+            width: 50%;
+    }
     }
 
     &__button {
@@ -19,9 +32,10 @@
         border: none;
         outline: none;
         pointer-events: none;
+        padding-right: 10px;
     }
 
-    #filter__input {
+    .filter__input {
         width: 90%;
         background-color: $secondary-bg;
         border: none;
@@ -40,6 +54,10 @@
     }
 
     &__select {
+
+        @media (max-width: 768px) {
+            margin-top: 20px;
+        }
 
         select {
             background-color: #2b3743;
@@ -73,6 +91,18 @@
         flex-direction: column;
         width: calc(25% - 70px);
         margin-bottom: 70px;
+
+        @media (max-width: 576px) {
+            width: 80%;
+        }
+
+        @media (min-width: 577px) and (max-width: 992px) {
+                width: 45%;
+        }
+
+        @media (min-width: 993px) and (max-width: 1400px) {
+            width: 30%;
+    }
         
         img {
             width: 100%;

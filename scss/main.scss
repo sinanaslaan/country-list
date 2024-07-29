@@ -2,6 +2,7 @@
 @import "homepage";
 @import "header";
 @import "colors";
+@import "mode";
 
 * {
     margin: 0;
@@ -27,6 +28,10 @@ main {
     margin-right: auto;
     margin-left: auto;
     max-width: 80%;
+
+    @media (max-width: 576px) {
+        max-width: 100%;
+    }
 }
 
 h2 {

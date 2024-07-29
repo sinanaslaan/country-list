@@ -9,6 +9,5 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-// Sunucuyu başlat
 app.listen(port, () => {
 });
