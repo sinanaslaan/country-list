@@ -91,7 +91,7 @@
               const countryName = item.querySelector('h2').textContent.toLowerCase();
 
               if (countryName.includes(filters)) {
-                item.style.display = 'block';
+                item.style.display = 'flex';
               }
               else {
                 item.style.display = 'none';
