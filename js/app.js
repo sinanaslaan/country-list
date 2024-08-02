@@ -6,7 +6,9 @@
         fetch(apiUrl)
           .then((res) => res.json())
           .then((data) => displayCountries(data));
+          
       };
+      
 
       const displayCountries = (countries) => {
         const countriesHTML = countries.map((countryItems) =>
@@ -14,6 +16,7 @@
         );
         const container = document.getElementById("country-item");
         container.innerHTML = countriesHTML.join("");
+        filter();
       };
 
       const getCountry = (country) => {
@@ -45,15 +48,18 @@
 
       // Light Mode //
 
+
       const lightMode = () => {
+
         const toggleButton = document.getElementById("mode-toggle");
         const classNames = ["header", "filter", "body", "country__info"];
         const noClassTag = ["img", "form", "i", "input", "select", "button"];
-
+        
         toggleButton.addEventListener("click", () => {
+          
           classNames.forEach((className) => {
             const addSelect = document.querySelectorAll(`.${className}`);
-            addSelect.forEach((classMode) => {
+            addSelect.forEach((classMode) => {  
               classMode.classList.toggle("light-mode");
             });
           });
@@ -64,10 +70,38 @@
               tagsMode.classList.toggle("light-mode");
             });
           });
+
         });
+
       };
 
 // Light Mode //
+
+// Filter //
+
+      const filter = () => {
+
+        const searchInput = document.getElementById("search");
+        const searchResults = document.querySelectorAll('.country__item');
+        
+          searchInput.addEventListener('input', (event) => {
+            const filters = event.target.value.toLowerCase();
+            
+            searchResults.forEach(item => {
+              const countryName = item.querySelector('h2').textContent.toLowerCase();
+
+              if (countryName.includes(filters)) {
+                item.style.display = 'block';
+              }
+              else {
+                item.style.display = 'none';
+              }
+        
+            });
+          });
+      };
+
+// Filter //
 
 lightMode();
 loadCountryApi();
