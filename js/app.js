@@ -33,7 +33,7 @@
               </div>
               <div class="country__info-item">
                 <h3>Region:</h3>
-                <span>${country.region}</span>
+                <span id="region">${country.region}</span>
               </div>
               <div class="country__info-item">
                 <h3>Capital:</h3>
@@ -79,27 +79,34 @@
 
 // Filter //
 
-      const filter = () => {
-
-        const searchInput = document.getElementById("search");
-        const searchResults = document.querySelectorAll('.country__item');
-        
-          searchInput.addEventListener('input', (event) => {
-            const filters = event.target.value.toLowerCase();
-            
-            searchResults.forEach(item => {
-              const countryName = item.querySelector('h2').textContent.toLowerCase();
-
-              if (countryName.includes(filters)) {
-                item.style.display = 'flex';
-              }
-              else {
-                item.style.display = 'none';
-              }
-        
-            });
-          });
-      };
+        const filter = () => {
+          
+          const searchInput = document.getElementById("search");
+          const regionSelect = document.getElementById("region");
+          const searchResults = document.querySelectorAll('.country__item');
+          
+          const applyFilters = () => {
+              const searchValue = searchInput.value.toLowerCase();
+              const selectedRegion = regionSelect.value.toLowerCase();
+              
+              searchResults.forEach(item => {
+                  const countryName = item.querySelector('h2').textContent.toLowerCase();
+                  const countryRegion = item.querySelector('#region').textContent.toLowerCase();
+                  
+                  const matchesSearch = countryName.includes(searchValue);
+                  const matchesRegion = selectedRegion === 'all' || countryRegion === selectedRegion;
+                  
+                  if (matchesSearch && matchesRegion) {
+                      item.style.display = 'flex';
+                  } else {
+                      item.style.display = 'none';
+                  }
+              });
+          };
+          
+          searchInput.addEventListener('input', applyFilters);
+          regionSelect.addEventListener('change', applyFilters);
+        };
 
 // Filter //
 
