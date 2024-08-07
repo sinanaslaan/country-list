@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/sinanaslaan/country-list#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "paginationjs": "^2.6.0"
   },
   "devDependencies": {
     "browser-sync": "^3.0.2",

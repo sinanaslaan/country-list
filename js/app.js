@@ -1,48 +1,72 @@
       // API Server //
 
-      const loadCountryApi = () => {
-        const apiUrl = "https://restcountries.com/v3.1/all";
+      let allCountries = [];
+      let totalPages = 0;
+      let currentPage = 1;
+      let itemsPerPage = 12;
 
-        fetch(apiUrl)
-          .then((res) => res.json())
-          .then((data) => displayCountries(data));
-          
-      };
-      
+        const loadCountryApi = async () => {
+            const apiUrl = "https://restcountries.com/v3.1/all";
 
-      const displayCountries = (countries) => {
-        const countriesHTML = countries.map((countryItems) =>
-          getCountry(countryItems)
-        );
-        const container = document.getElementById("country-item");
-        container.innerHTML = countriesHTML.join("");
-        filter();
-      };
+            try {
+                const res = await fetch(apiUrl);
+                const data = await res.json();
+                allCountries = data;
+                totalPages = Math.ceil(allCountries.length / itemsPerPage);
+                displayCountries();
+                filter();
+                pagination();
+            } catch (error) {
+                console.log("Veriler Alınırken Hata Oluştu:", error);
+            }
+        };
 
-      const getCountry = (country) => {
-        return `
-          <div class="country__item">
-            <img src="${country.flags.png}" alt="${country.name.common}">
-            <div class="country__info">
-              <div class="country__info-item">
-                <h2>${country.name.common}</h2>
-              </div>
-              <div class="country__info-item">
-                <h3>Population:</h3>
-                <span>${country.population}</span>
-              </div>
-              <div class="country__info-item">
-                <h3>Region:</h3>
-                <span id="region">${country.region}</span>
-              </div>
-              <div class="country__info-item">
-                <h3>Capital:</h3>
-                <span>${country.capital}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      };
+            const displayCountries = (countries = allCountries) => {
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = Math.min(startIndex + itemsPerPage, allCountries.length);
+                
+                const countriesToShow = countries.slice(startIndex, endIndex);  
+                   
+                const countriesHTML = countriesToShow.map((country) => getCountry(country)).join("");
+
+                const container = document.getElementById("country-item");
+                container.innerHTML = countriesHTML;
+                
+            };
+
+
+        const getCountry = (country) => {
+            return `
+                <div class="country__item">
+                    <img src="${country.flags.png}" alt="${country.name.common}">
+                    <div class="country__info">
+                        <div class="country__info-item">
+                            <h2>${country.name.common}</h2>
+                        </div>
+                        <div class="country__info-item">
+                            <h3>Population:</h3>
+                            <span>${country.population}</span>
+                        </div>
+                        <div class="country__info-item">
+                            <h3>Region:</h3>
+                            <span id="region">${country.region}</span>
+                        </div>
+                        <div class="country__info-item">
+                            <h3>Capital:</h3>
+                            <span>${country.capital}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const debounce = (func, wait) => {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        };
 
       // API Server //
 
@@ -80,35 +104,93 @@
 // Filter //
 
         const filter = () => {
-          
           const searchInput = document.getElementById("search");
           const regionSelect = document.getElementById("region");
-          const searchResults = document.querySelectorAll('.country__item');
-          
+
           const applyFilters = () => {
               const searchValue = searchInput.value.toLowerCase();
               const selectedRegion = regionSelect.value.toLowerCase();
-              
-              searchResults.forEach(item => {
-                  const countryName = item.querySelector('h2').textContent.toLowerCase();
-                  const countryRegion = item.querySelector('#region').textContent.toLowerCase();
-                  
+
+              const filteredCountries = allCountries.filter(country => {
+                  const countryName = country.name.common.toLowerCase();
+                  const countryRegion = country.region.toLowerCase();
+
                   const matchesSearch = countryName.includes(searchValue);
                   const matchesRegion = selectedRegion === 'all' || countryRegion === selectedRegion;
-                  
-                  if (matchesSearch && matchesRegion) {
-                      item.style.display = 'flex';
-                  } else {
-                      item.style.display = 'none';
-                  }
+
+                  return matchesSearch && matchesRegion;
               });
+
+              searchInput.addEventListener('input', () => {
+                if (searchInput.value === '') {
+                    currentPage = 1; 
+                    displayCountries();
+                    pagination();
+                }
+            });
+              
+              currentPage = 1;
+
+              displayCountries(filteredCountries);
           };
-          
+
           searchInput.addEventListener('input', applyFilters);
           regionSelect.addEventListener('change', applyFilters);
         };
 
+
 // Filter //
 
-lightMode();
+// Pagination //
+              const pagination = () => {
+                const prevButton = document.getElementById('previous');
+                const nextButton = document.getElementById('next');
+                const pageCountElement = document.getElementById('page-numbers');
+
+                const visibledPages = 5;
+
+                const paginationCount = () => {
+                    pageCountElement.innerHTML = ''; 
+
+                    const startPage = Math.max(1, currentPage - Math.floor(visibledPages / 2));
+                    const endPage = Math.min(totalPages, startPage + visibledPages - 1);
+
+                    for (let i = startPage; i <= endPage; i++) {
+                        const pageItem = document.createElement('li');
+                        pageItem.textContent = i;
+                        pageItem.className = i === currentPage ? 'active' : '';
+
+                        pageItem.addEventListener('click', () => {
+                            currentPage = i;
+                            displayCountries();
+                            paginationCount();
+                        });
+
+                        pageCountElement.appendChild(pageItem);
+                    }
+                };
+
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayCountries();
+                        paginationCount();
+                    }
+                });
+
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayCountries();
+                        paginationCount();
+                    }
+                });
+
+                paginationCount();
+              };
+
+
+// Pagination //
 loadCountryApi();
+lightMode();
+
