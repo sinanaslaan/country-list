@@ -377,6 +377,15 @@ template {
   border-radius: 5px;
 }
 
+#itemResults {
+  display: none;
+  padding-top: 30px;
+}
+#itemResults p {
+  text-align: center;
+  font-size: 20px;
+}
+
 .country {
   margin-top: 80px;
 }

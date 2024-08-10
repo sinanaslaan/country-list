@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Where in the world?</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-      </style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+    </style>
   </head>
   <body class="body">
     <header class="header">
@@ -19,11 +25,10 @@
           </div>
           <div class="header__mode">
             <i class="fa fa-sun-o" aria-hidden="true"></i>
-            <input id='mode-toggle' type="checkbox" checked hidden>
+            <input id="mode-toggle" type="checkbox" checked hidden />
             <label for="mode-toggle"></label>
             <i class="fa fa-moon-o" aria-hidden="true"></i>
           </div>
-          
         </div>
       </div>
     </header>
@@ -36,7 +41,13 @@
                 <button class="filter__button">
                   <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                 </button>
-                <input class="filter__input" id="search" type="text" autocomplete="off" placeholder="Search for a country..." /> 
+                <input
+                  class="filter__input"
+                  id="search"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="Search for a country..."
+                />
               </form>
             </div>
             <div class="filter__select">
@@ -49,29 +60,31 @@
                 <option value="Oceania">Oceania</option>
               </select>
             </div>
-        </div>
+          </div>
         </div>
       </div>
-
+      <div id="itemResults">
+        <div class="container">
+          <p>Sonuç Bulunamadı...</p>
+        </div>
+      </div>
       <div class="country">
         <div class="container">
-          <div class="country__wrapper" id="country-item">
-            
-          </div>
+          <div class="country__wrapper" id="country-item"></div>
         </div>
       </div>
       <div class="pagination" id="pagination">
         <div class="container">
-        <div class="pagination__wrapper">
-          
-            <button id="previous"><i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></button>
-              <ul id="page-numbers">
-              </ul>
-              <button id="next"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></button>
+          <div class="pagination__wrapper">
+            <button id="previous">
+              <i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+            </button>
+            <ul id="page-numbers"></ul>
+            <button id="next">
+              <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
+            </button>
           </div>
-        
         </div>
-        
       </div>
     </main>
     <script type="module" src="/js/app.js"></script>

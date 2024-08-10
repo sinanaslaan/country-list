@@ -4,6 +4,8 @@
       let totalPages = 0;
       let currentPage = 1;
       let itemsPerPage = 12;
+      let selectedRegion = 'all';
+      let searchValue = '';
 
         const loadCountryApi = async () => {
             const apiUrl = "https://restcountries.com/v3.1/all";
@@ -15,7 +17,6 @@
                 totalPages = Math.ceil(allCountries.length / itemsPerPage);
                 displayCountries();
                 filter();
-                pagination();
             } catch (error) {
                 console.log("Veriler Alınırken Hata Oluştu:", error);
             }
@@ -23,15 +24,14 @@
 
             const displayCountries = (countries = allCountries) => {
                 const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = Math.min(startIndex + itemsPerPage, allCountries.length);
-                
-                const countriesToShow = countries.slice(startIndex, endIndex);  
-                   
+                const endIndex = Math.min(startIndex + itemsPerPage, countries.length);
+            
+                const countriesToShow = countries.slice(startIndex, endIndex);
+            
                 const countriesHTML = countriesToShow.map((country) => getCountry(country)).join("");
-
+            
                 const container = document.getElementById("country-item");
                 container.innerHTML = countriesHTML;
-                
             };
 
 
@@ -73,81 +73,97 @@
       // Light Mode //
 
 
-      const lightMode = () => {
+            const lightMode = () => {
 
-        const toggleButton = document.getElementById("mode-toggle");
-        const classNames = ["header", "filter", "body", "country__info"];
-        const noClassTag = ["img", "form", "i", "input", "select", "button"];
-        
-        toggleButton.addEventListener("click", () => {
-          
-          classNames.forEach((className) => {
-            const addSelect = document.querySelectorAll(`.${className}`);
-            addSelect.forEach((classMode) => {  
-              classMode.classList.toggle("light-mode");
-            });
-          });
+                const toggleButton = document.getElementById("mode-toggle");
+                const classNames = ["header", "filter", "body", "country__info"];
+                const noClassTag = ["img", "form", "i", "input", "select", "button"];
+                
+                toggleButton.addEventListener("click", () => {
+                
+                classNames.forEach((className) => {
+                    const addSelect = document.querySelectorAll(`.${className}`);
+                    addSelect.forEach((classMode) => {  
+                    classMode.classList.toggle("light-mode");
+                    });
+                });
 
-          noClassTag.forEach((tags) => {
-            const addTags = document.querySelectorAll(tags);
-            addTags.forEach((tagsMode) => {
-              tagsMode.classList.toggle("light-mode");
-            });
-          });
+                noClassTag.forEach((tags) => {
+                    const addTags = document.querySelectorAll(tags);
+                    addTags.forEach((tagsMode) => {
+                    tagsMode.classList.toggle("light-mode");
+                    });
+                });
 
-        });
+                });
 
-      };
+            };
 
 // Light Mode //
 
 // Filter //
 
         const filter = () => {
-          const searchInput = document.getElementById("search");
-          const regionSelect = document.getElementById("region");
+            const searchInput = document.getElementById("search");
+            const regionSelect = document.getElementById("region");
 
-          const applyFilters = () => {
-              const searchValue = searchInput.value.toLowerCase();
-              const selectedRegion = regionSelect.value.toLowerCase();
+            const updateFilters = () => {
+                searchValue = searchInput.value.toLowerCase();
+                selectedRegion = regionSelect.value.toLowerCase();
+                currentPage = 1;
+                applyFilters();
+            };
 
-              const filteredCountries = allCountries.filter(country => {
-                  const countryName = country.name.common.toLowerCase();
-                  const countryRegion = country.region.toLowerCase();
+            searchInput.addEventListener('input', updateFilters);
+            regionSelect.addEventListener('change', updateFilters);
 
-                  const matchesSearch = countryName.includes(searchValue);
-                  const matchesRegion = selectedRegion === 'all' || countryRegion === selectedRegion;
+        
+            displayCountries();
+            pagination(allCountries);
+        };
 
-                  return matchesSearch && matchesRegion;
-              });
-
-              searchInput.addEventListener('input', () => {
-                if (searchInput.value === '') {
-                    currentPage = 1; 
-                    displayCountries();
-                    pagination();
-                }
+        const applyFilters = () => {
+            const filteredCountries = allCountries.filter(country => {
+                const countryName = country.name.common.toLowerCase();
+                const countryRegion = country.region.toLowerCase();
+        
+                const matchesSearch = countryName.includes(searchValue);
+                const matchesRegion = selectedRegion === 'all' || countryRegion === selectedRegion;
+        
+                return matchesSearch && matchesRegion;
             });
-              
-              currentPage = 1;
 
-              displayCountries(filteredCountries);
-          };
+            if (filteredCountries.length === 0) {
+                document.getElementById('itemResults').style.display = 'block';
+                document.getElementById('pagination').style.display = 'none';
+            } else {
+                document.getElementById('itemResults').style.display = 'none';
+                document.getElementById('pagination').style.display = 'block';
+            };
 
-          searchInput.addEventListener('input', applyFilters);
-          regionSelect.addEventListener('change', applyFilters);
+            totalPages = Math.ceil(filteredCountries.length / itemsPerPage);
+            currentPage = Math.min(currentPage, totalPages);
+            
+            displayCountries(filteredCountries);
         };
 
 
 // Filter //
 
 // Pagination //
-              const pagination = () => {
+            const pagination = (filteredCountries = allCountries) => {
                 const prevButton = document.getElementById('previous');
                 const nextButton = document.getElementById('next');
                 const pageCountElement = document.getElementById('page-numbers');
+                const visibledPages = 3;
+                
+                totalPages = Math.ceil(filteredCountries.length / itemsPerPage);
+                currentPage = Math.min(currentPage, totalPages);
 
-                const visibledPages = 5;
+                const buttonClickUpdate = () => {
+                    prevButton.disabled = currentPage === 1;
+                    nextButton.disabled = currentPage === totalPages;
+                }
 
                 const paginationCount = () => {
                     pageCountElement.innerHTML = ''; 
@@ -162,8 +178,9 @@
 
                         pageItem.addEventListener('click', () => {
                             currentPage = i;
-                            displayCountries();
+                            applyFilters();
                             paginationCount();
+                            buttonClickUpdate();
                         });
 
                         pageCountElement.appendChild(pageItem);
@@ -173,24 +190,26 @@
                 prevButton.addEventListener('click', () => {
                     if (currentPage > 1) {
                         currentPage--;
-                        displayCountries();
+                        applyFilters();
                         paginationCount();
+                        buttonClickUpdate();
                     }
                 });
 
                 nextButton.addEventListener('click', () => {
                     if (currentPage < totalPages) {
                         currentPage++;
-                        displayCountries();
+                        applyFilters();
                         paginationCount();
+                        buttonClickUpdate();
                     }
                 });
 
                 paginationCount();
-              };
+            };
+
 
 
 // Pagination //
 loadCountryApi();
 lightMode();
-
