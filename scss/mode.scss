@@ -6,7 +6,7 @@
     }
 
     body.light-mode {
-        
+
         background: $main-white-bg 0% 0% no-repeat padding-box;
         color: $text-white;
        
@@ -40,6 +40,23 @@
             &__info {
                 background-color: $white-sec-bg;
                 box-shadow: 0px 5px 10px $white-box-sh; 
+            }
+        }
+
+        .pagination {
+            
+            &__wrapper {
+                li {
+                    border: 1px solid #000;
+
+                    &:hover {
+                        background: #000;
+                    }
+                    &.active {
+                        background: #000;
+                        color: #fff;
+                    }
+                }
             }
         }
         
