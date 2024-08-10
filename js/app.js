@@ -76,22 +76,31 @@
             const lightMode = () => {
 
                 const toggleButton = document.getElementById("mode-toggle");
-                const classNames = ["header", "filter", "body", "country__info"];
-                const noClassTag = ["img", "form", "i", "input", "select", "button"];
+                const classNames = ["body"];
+                const currentTheme = localStorage.getItem('theme');
+
+                if (currentTheme) {
+                    document.body.className = currentTheme;
+                    toggleButton.checked = (currentTheme === 'light-mode');
+                }
+                else {
+                    toggleButton.checked = false;
+                }
                 
                 toggleButton.addEventListener("click", () => {
+
+                    if (document.body.classList.contains('dark-mode')) {
+                        document.body.className = 'light-mode';
+                        localStorage.setItem('theme', 'light-mode');
+                    } else {
+                        document.body.className = 'dark-mode';
+                        localStorage.setItem('theme', 'dark-mode');
+                    }
                 
                 classNames.forEach((className) => {
                     const addSelect = document.querySelectorAll(`.${className}`);
                     addSelect.forEach((classMode) => {  
                     classMode.classList.toggle("light-mode");
-                    });
-                });
-
-                noClassTag.forEach((tags) => {
-                    const addTags = document.querySelectorAll(tags);
-                    addTags.forEach((tagsMode) => {
-                    tagsMode.classList.toggle("light-mode");
                     });
                 });
 

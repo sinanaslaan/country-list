@@ -530,40 +530,35 @@ template {
 
 .light-mode * {
   color: #121315;
+  transition: 0.3s all ease;
 }
 
 body.light-mode {
   background: #fafafa 0% 0% no-repeat padding-box;
   color: #121315;
 }
-
-.header.light-mode {
+body.light-mode .header {
   background-color: #ffffff;
   box-shadow: 0px 5px 10px #DBD6D8;
 }
-
-.filter.light-mode__button i.light-mode {
-  background-color: #7e7e7e;
-}
-.filter.light-mode form.light-mode {
+body.light-mode .filter form {
   background-color: #ffffff;
   box-shadow: 0px 5px 10px #DBD6D8;
 }
-.filter.light-mode input.light-mode {
+body.light-mode .filter input {
   background-color: #ffffff;
 }
-.filter.light-mode select.light-mode {
+body.light-mode .filter select {
   background-color: #ffffff;
   box-shadow: 0px 5px 10px #DBD6D8;
 }
-.filter.light-mode button.light-mode {
+body.light-mode .filter button {
   background-color: #ffffff;
 }
-
-.country img.light-mode {
+body.light-mode .country img {
   box-shadow: 0px 5px 10px #DBD6D8;
 }
-.country__info.light-mode {
+body.light-mode .country__info {
   background-color: #ffffff;
   box-shadow: 0px 5px 10px #DBD6D8;
 }
@@ -574,6 +569,7 @@ body.light-mode {
   box-sizing: border-box;
   font-family: "Nunito Sans";
   color: #dae4ed;
+  transition: 0.3s all ease;
 }
 
 body {
