@@ -155,7 +155,9 @@
                 const prevButton = document.getElementById('previous');
                 const nextButton = document.getElementById('next');
                 const pageCountElement = document.getElementById('page-numbers');
-                const visibledPages = 3;
+                const visibledPages = 5;
+                const selectBox = document.getElementById('region');
+                const inputArea = document.getElementById('search');
                 
                 totalPages = Math.ceil(filteredCountries.length / itemsPerPage);
                 currentPage = Math.min(currentPage, totalPages);
@@ -164,6 +166,12 @@
                     prevButton.disabled = currentPage === 1;
                     nextButton.disabled = currentPage === totalPages;
                 }
+
+                const countReset = () => {
+                    currentPage = Math.min(currentPage, totalPages);
+                    paginationCount();
+                    buttonClickUpdate();
+                };
 
                 const paginationCount = () => {
                     pageCountElement.innerHTML = ''; 
@@ -203,6 +211,16 @@
                         paginationCount();
                         buttonClickUpdate();
                     }
+                });
+
+                inputArea.addEventListener('input', () => {
+                    applyFilters();
+                    countReset();
+                })
+                
+                selectBox.addEventListener('change', () => {
+                    applyFilters();
+                    countReset();
                 });
 
                 paginationCount();
